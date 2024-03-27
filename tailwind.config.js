@@ -21,7 +21,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Nunito"],
+        sans: ["Nunito", "sans-serif"],
       },
     },
   },
