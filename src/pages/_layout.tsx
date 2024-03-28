@@ -7,7 +7,7 @@ export function Layout() {
     <div>
       <Header />
 
-      <main className="container">
+      <main className="container -mt-20 pb-32">
         <Outlet />
       </main>
     </div>

@@ -9,7 +9,7 @@ import { Link } from "./link"
 
 export function Profile() {
   return (
-    <div className="flex gap-8 rounded-xl bg-base-profile p-8 shadow">
+    <div className="flex flex-col items-center gap-8 rounded-xl bg-base-profile p-6 shadow md:flex-row md:items-stretch md:p-8">
       <div>
         <img
           src="https://github.com/carlos-hfc.png"
@@ -19,8 +19,8 @@ export function Profile() {
         />
       </div>
 
-      <div className="flex flex-1 flex-col">
-        <div className="flex items-center justify-between">
+      <div className="flex flex-1 flex-col gap-2">
+        <div className="flex flex-wrap items-center justify-between">
           <h2 className="text-2xl font-bold leading-snug text-base-title">
             Carlos Faustino
           </h2>
@@ -35,13 +35,13 @@ export function Profile() {
           </Link>
         </div>
 
-        <p className="mt-2 leading-relaxed text-base-text">
+        <p className="leading-relaxed text-base-text">
           Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
           viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
           pulvinar vel mass.
         </p>
 
-        <footer className="flex flex-1 items-end gap-6">
+        <footer className="flex flex-1 flex-col gap-2 md:flex-row md:items-end md:gap-6">
           <div className="flex items-center gap-2">
             <FaGithub className="text-lg text-base-label" />
             <span className="leading-relaxed text-base-subtitle">
