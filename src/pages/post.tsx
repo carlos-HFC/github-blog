@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query"
 import { format } from "date-fns"
-import { useEffect, useState } from "react"
 import {
   FaArrowUpRightFromSquare,
   FaCalendarDay,
@@ -8,36 +8,21 @@ import {
   FaGithub,
 } from "react-icons/fa6"
 import Markdown from "react-markdown"
-import { useParams } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom"
 
+import { getIssueDetails } from "../api/get-issue-details"
 import { Link } from "../components/link"
-import { api } from "../lib/axios"
 import { formatDistance } from "../utils/format-distance"
-
-interface PostProps {
-  number: number
-  html_url: string
-  title: string
-  user: {
-    login: string
-  }
-  comments: number
-  created_at: string
-  body: string
-}
 
 export function Post() {
   const params = useParams<"number">()
 
-  const [post, setPost] = useState<PostProps>()
+  const { data: post } = useQuery({
+    queryKey: ["issue", params.number],
+    queryFn: () => getIssueDetails({ number: Number(params.number) }),
+  })
 
-  useEffect(() => {
-    api
-      .get(`/repos/carlos-hfc/github-blog/issues/${params.number}`)
-      .then(response => setPost(response.data))
-  }, [params.number])
-
-  if (!params.number || !post) return null
+  if (!post) return <Navigate to="/" />
 
   const postDateFormat = format(
     new Date(post.created_at),
@@ -53,7 +38,7 @@ export function Post() {
             Voltar
           </Link>
           <Link
-            to={post.html_url}
+            to={post.html_url ?? ""}
             target="_blank"
             rel="noreferrer"
           >
