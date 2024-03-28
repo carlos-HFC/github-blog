@@ -1,8 +1,22 @@
+import { format } from "date-fns"
+import Markdown from "react-markdown"
 import { Link, LinkProps } from "react-router-dom"
 
-interface CardProps extends LinkProps {}
+import { formatDistance } from "../utils/format-distance"
+
+interface CardProps extends LinkProps {
+  number: number
+  title: string
+  created_at: string
+  body: string
+}
 
 export function Card(props: Readonly<CardProps>) {
+  const postDateFormat = format(
+    new Date(props.created_at),
+    "dd 'de' MMMM 'às' HH:mm",
+  )
+
   return (
     <Link
       {...props}
@@ -10,19 +24,19 @@ export function Card(props: Readonly<CardProps>) {
     >
       <div className="flex items-baseline justify-between gap-4">
         <h2 className="line-clamp-2 text-xl font-bold leading-relaxed text-base-title">
-          JavaScript data types and data structures
+          {props.title}
         </h2>
-        <time className="text-nowrap text-sm leading-relaxed text-base-span">
-          Há 1 dia
+        <time
+          dateTime={new Date(props.created_at).toISOString()}
+          title={postDateFormat}
+          className="text-nowrap text-sm leading-relaxed text-base-span"
+        >
+          {formatDistance(props.created_at)}
         </time>
       </div>
 
       <p className="line-clamp-4 leading-relaxed text-base-text">
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in JavaScript and what properties
-        they have. These can be used to build other data structures. Wherever
-        possible, comparisons with other languages are drawn.
+        <Markdown>{props.body}</Markdown>
       </p>
     </Link>
   )

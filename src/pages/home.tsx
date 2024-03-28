@@ -1,7 +1,25 @@
+import { useEffect, useState } from "react"
+
 import { Card } from "../components/card"
 import { Profile } from "../components/profile"
+import { api } from "../lib/axios"
+
+interface PostProps {
+  number: number
+  title: string
+  created_at: string
+  body: string
+}
 
 export function Home() {
+  const [posts, setPosts] = useState<PostProps[]>([])
+
+  useEffect(() => {
+    api
+      .get("/repos/carlos-hfc/github-blog/issues")
+      .then(response => setPosts(response.data))
+  }, [])
+
   return (
     <>
       <Profile />
@@ -24,10 +42,11 @@ export function Home() {
       </form>
 
       <div className="mt-6 grid gap-6 md:mt-12 md:grid-cols-2 md:gap-8">
-        {Array.from({ length: 6 }).map((_, i) => (
+        {posts.map((post, i) => (
           <Card
-            to="/post"
+            to={`/post/${post.number}`}
             key={i}
+            {...post}
           />
         ))}
       </div>
