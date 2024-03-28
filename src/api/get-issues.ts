@@ -1,3 +1,4 @@
+import { env } from "../env"
 import { api } from "../lib/axios"
 
 interface GetIssuesRequest {
@@ -17,7 +18,7 @@ export async function getIssues({ query }: GetIssuesRequest) {
       "/search/issues",
       {
         params: {
-          q: `${query} repo:carlos-hfc/github-blog`,
+          q: `${query} repo:${env.VITE_GITHUB_USER}/${env.VITE_GITHUB_REPOSITORY}`,
         },
       },
     )
@@ -26,7 +27,7 @@ export async function getIssues({ query }: GetIssuesRequest) {
   }
 
   const response = await api.get<GetIssuesResponse[]>(
-    "/repos/carlos-hfc/github-blog/issues",
+    `/repos/${env.VITE_GITHUB_USER}/${env.VITE_GITHUB_REPOSITORY}/issues`,
   )
 
   return response.data

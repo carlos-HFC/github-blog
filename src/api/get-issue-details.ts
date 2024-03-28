@@ -1,3 +1,4 @@
+import { env } from "../env"
 import { api } from "../lib/axios"
 
 interface GetIssueDetailsRequest {
@@ -18,7 +19,7 @@ interface GetIssueDetailsResponse {
 
 export async function getIssueDetails({ number }: GetIssueDetailsRequest) {
   const response = await api.get<GetIssueDetailsResponse>(
-    `/repos/carlos-hfc/github-blog/issues/${number}`,
+    `/repos/${env.VITE_GITHUB_USER}/${env.VITE_GITHUB_REPOSITORY}/issues/${number}`,
   )
 
   return response.data

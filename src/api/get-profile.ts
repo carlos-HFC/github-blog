@@ -1,3 +1,4 @@
+import { env } from "../env"
 import { api } from "../lib/axios"
 
 interface GetProfileResponse {
@@ -11,7 +12,9 @@ interface GetProfileResponse {
 }
 
 export async function getProfile() {
-  const response = await api.get<GetProfileResponse>("/users/carlos-hfc")
+  const response = await api.get<GetProfileResponse>(
+    `/users/${env.VITE_GITHUB_USER}`,
+  )
 
   return response.data
 }

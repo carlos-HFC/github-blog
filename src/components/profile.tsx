@@ -51,12 +51,16 @@ function ProfileComp() {
               {profile?.login}
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <FaBuilding className="text-lg text-base-label" />
-            <span className="leading-relaxed text-base-subtitle">
-              {profile?.company}
-            </span>
-          </div>
+
+          {profile?.company && (
+            <div className="flex items-center gap-2">
+              <FaBuilding className="text-lg text-base-label" />
+              <span className="leading-relaxed text-base-subtitle">
+                {profile?.company}
+              </span>
+            </div>
+          )}
+
           <div className="flex items-center gap-2">
             <FaUserGroup className="text-lg text-base-label" />
             <span className="leading-relaxed text-base-subtitle">
