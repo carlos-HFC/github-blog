@@ -13,6 +13,9 @@ export default {
       backgroundImage: {
         header: "url(/cover.png)",
       },
+      boxShadow: {
+        DEFAULT: "0px 2px 28px rgba(0, 0, 0, 0.2)",
+      },
       colors: {
         blue: {
           DEFAULT: "#3294f8",
