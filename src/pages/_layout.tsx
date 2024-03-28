@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, ScrollRestoration } from "react-router-dom"
 
 import { Header } from "../components/header"
 
@@ -8,6 +8,7 @@ export function Layout() {
       <Header />
 
       <main className="container -mt-20 pb-32">
+        <ScrollRestoration />
         <Outlet />
       </main>
     </div>
