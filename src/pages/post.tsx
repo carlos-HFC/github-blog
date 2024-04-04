@@ -8,7 +8,7 @@ import {
   FaGithub,
 } from "react-icons/fa6"
 import Markdown from "react-markdown"
-import { Navigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 import { getIssueDetails } from "../api/get-issue-details"
 import { Link } from "../components/link"
@@ -22,7 +22,12 @@ export function Post() {
     queryFn: () => getIssueDetails({ number: Number(params.number) }),
   })
 
-  if (!post) return <Navigate to="/" />
+  if (!post)
+    return (
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className=" size-16 animate-spin rounded-full border-4 border-base-text border-b-transparent" />
+      </div>
+    )
 
   const postDateFormat = format(
     new Date(post.created_at),
@@ -79,7 +84,7 @@ export function Post() {
         </div>
       </div>
 
-      <Markdown className="prose prose-blockquote:border-s-base-label prose-pre:bg-base-post prose-pre:text-base-subtitle prose-headings:font-bold prose-strong:font-bold prose-strong:text-base-text prose-a:text-blue max-w-full px-4 py-10 *:text-base-text md:px-8">
+      <Markdown className="prose max-w-full px-4 py-10 *:text-base-text prose-headings:font-bold prose-a:text-blue prose-blockquote:border-s-base-label prose-strong:font-bold prose-strong:text-base-text prose-pre:bg-base-post prose-pre:text-base-subtitle md:px-8">
         {post.body}
       </Markdown>
     </>

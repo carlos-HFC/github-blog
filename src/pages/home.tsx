@@ -72,10 +72,10 @@ export function Home() {
       </form>
 
       <div className="mt-6 grid gap-6 md:mt-12 md:grid-cols-2 md:gap-8">
-        {result?.map((post, i) => (
+        {result?.map(post => (
           <Card
             to={`/post/${post.number}`}
-            key={i}
+            key={post.number}
             {...post}
           />
         ))}
